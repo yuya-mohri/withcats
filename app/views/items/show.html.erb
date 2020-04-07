@@ -1,2 +1,26 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<div class="row">
+  <div class="col-sm-10 offset-sm-1">
+    <div class="card">
+      <% if @item.image? %>
+        <%= image_tag @item.image.url, class: 'card-img-top' %>
+      <% end %>
+    
+      <div class="card-body">
+        <strong><%= @item.name %></strong>
+        <p><%= @item.description %></p>
+        <p class="text-right">¥<%= @item.price %></p>
+        <% if @item.stock != 0 %>
+          <p class="text-right text-success">在庫あり</p>    
+        <% else %>
+          <p class="text-right text-danger">在庫なし</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= link_to '商品情報を変更', edit_item_path(@item), class: 'btn btn-secondary btn-block rounded-pill' %>
+  </div>
+</div>
+<%= link_to '<< 前の画面に戻る', :back %>

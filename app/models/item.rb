@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
+  enum status: {not_on_sale: 0, on_sale: 10}
   
   validates :name, presence: true
   validates :price, presence: true
