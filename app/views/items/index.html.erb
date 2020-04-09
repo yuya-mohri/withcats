@@ -1,3 +1,4 @@
+<% if logged_in? && current_user.admin_flag == true %>
 <div class="row">
   <% @items.each do |item| %>
     <% if item.status == "not_on_sale" %>
@@ -16,12 +17,31 @@
         <p>¥<%= item.price %></p>
         
         <% if item.not_on_sale? %>
-        <%= link_to '公開', onsale_item_path(item), class: 'btn btn-secondary rounded-pill', method: :patch %>
+          <%= link_to '公開', onsale_item_path(item), class: 'btn btn-secondary rounded-pill', method: :patch %>
         <% else %>
-        <%= link_to '非公開', not_onsale_item_path(item), class: 'btn btn-secondary rounded-pill', method: :patch %>
+          <%= link_to '非公開', not_onsale_item_path(item), class: 'btn btn-secondary rounded-pill', method: :patch %>
         <% end %>
       </div>
     </div>
   <% end %>
 </div>
+<% else %>
+<div class="row">
+  <% @items.on_sale.each do |item| %>
+    <div class="col-sm-4">
+      <div class="card img-thumbnail">
+          <% if item.image? %>
+            <%= image_tag item.image.url, class: 'card-img-top' %>
+          <% end %>
+      </div>
+      <div class="card-body">
+        <p><%= link_to "#{item.name}", item_path(item) %></p>
+        <p><%= item.description %></p>
+        <p>¥<%= item.price %></p>
+      </div>
+    </div>  
+  <% end %>
+</div>
+<% end %>
+
 <%= paginate @items %>

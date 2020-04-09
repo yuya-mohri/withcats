@@ -1,2 +1,42 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1 class="text-center">ユーザプロフィールの編集</h1>
+
+<%= form_with(model:@user, local:true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th scope="row" class="text-center">名前</th>
+      <td><%= f.text_field :name, class: 'form-control' %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">メールアドレス</th>
+      <td><%= f.email_field :email, class: 'form-control' %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">電話番号</th>
+      <td><%= f.telephone_field :tel, class: 'form-control' %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">郵便番号</th>
+      <td><%= f.text_field :postcode, class: 'form-control' %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">住所</th>
+      <td><%= f.text_field :address, class: 'form-control' %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">パスワード</th>
+      <td><%= f.password_field :password, placeholder: 'パスワードを変更する場合は入力してください', class: 'form-control' %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">パスワードの再確認</th>
+      <td><%= f.password_field :password_confirmation, placeholder: 'パスワードを変更する場合は入力してください', class: 'form-control' %></td>
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= f.submit '確　定', class: 'btn btn-primary btn-block rounded-pill' %>
+  </div>
+</div>
+<% end %>

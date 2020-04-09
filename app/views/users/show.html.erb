@@ -1,2 +1,35 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1 class="text-center">ユーザプロフィール</h1>
+
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th scope="row" class="text-center">名前</th>
+      <td class="text-center"><%= current_user.name %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">メールアドレス</th>
+      <td class="text-center"><%= current_user.email %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">電話番号</th>
+      <td class="text-center"><%= current_user.tel %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">郵便番号</th>
+      <td class="text-center"><%= current_user.postcode %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">住所</th>
+      <td class="text-center"><%= current_user.address %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-center">パスワード</th>
+      <td class="text-center">******</td>
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= link_to '登録情報を編集する', edit_user_path(@user), class: 'btn btn-secondary btn-block rounded-pill' %>
+  </div>
+</div>

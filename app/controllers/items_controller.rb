@@ -1,6 +1,11 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.order("RAND()").all.page(params[:page])
+    search_word = params[:search]
+    if search_word == nil
+      @items = Item.order("RAND()").all.page(params[:page])
+    else
+      @items = Item.where(['name LIKE ? or description LIKE ?', "%#{search_word}%", "%#{search_word}%"]).page(params[:page])
+    end  
   end
 
   def show
@@ -18,7 +23,7 @@ class ItemsController < ApplicationController
       flash[:success] = '新規アイテムを登録しました'
       redirect_to @item
     else
-      flash[:danger] = '新規アイテムの登録に失敗しました'
+      flash.now[:danger] = '新規アイテムの登録に失敗しました'
       render :new
     end
   end  
@@ -34,7 +39,7 @@ class ItemsController < ApplicationController
       flash[:success] = '商品情報を変更しました'
       redirect_to @item
     else
-      flash[:danger] = '商品情報を変更できませんでした'
+      flash.now[:danger] = '商品情報を変更できませんでした'
       render :edit
     end  
   end

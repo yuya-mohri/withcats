@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
+  has_many :cart_items
   enum status: {not_on_sale: 0, on_sale: 10}
   
   validates :name, presence: true
