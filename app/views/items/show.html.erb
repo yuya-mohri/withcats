@@ -9,7 +9,7 @@
         <strong><%= @item.name %></strong>
         <p><%= @item.description %></p>
         <p class="text-right">¥<%= @item.price %></p>
-        <% if @item.stock != 0 %>
+        <% if @item.stock > 0 %>
           <p class="text-right text-success">在庫あり</p>    
         <% else %>
           <p class="text-right text-danger">在庫なし</p>
@@ -32,9 +32,14 @@
       </div>
     </div>
   <% else %>
-    <div class="row">
-      <div class="col">
-        あとで数量入力とカートに入れるボタンを置く
+    <div class="row my-4">
+      <div class="col-sm-4 offset-sm-8">
+        <%= form_with(model: current_user.cart_items.build, local:true) do |f| %>
+          <%= f.label :quantity, '数量' %>
+          <%= f.select :quantity, (1..@item.stock).to_a %>
+          <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.submit 'カートに入れる' %>
+        <% end %>  
       </div>
     </div>
   <% end %>
