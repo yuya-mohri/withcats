@@ -14,5 +14,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   
-  resources :cart_items, only: [:index, :create, :edit, :update, :destroy]
+  resources :cart_items, only: [:index, :create, :update, :destroy] do
+    collection do
+      patch :confirm 
+    end
+  end  
 end

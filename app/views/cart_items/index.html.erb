@@ -1,3 +1,61 @@
-<h1 class="text-center">カート内の商品</h1>
+<% if @cart_items.count > 0 %>
+  <h1 class="text-center">カート内の商品</h1>
+  
+  
+  <% total_price = [] %>
+  <% total_quantity = [] %>
+  <% @cart_items.each do |cart_item|%>
+  <div class="row">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td style="width:25%">
+            <% if cart_item.item.image? %>
+            <%= image_tag cart_item.item.image.url, size: '300x200' %>
+            <% end %>
+          </td>
+          <td style="width:25%" align="left"><%= link_to "#{cart_item.item.name}", item_path(cart_item.item_id)  %></td>
+          <td style="width:25%" align="center">
+            <%= form_with(model: cart_item, local: true) do |f| %>
+              <%= f.label :quantity, '数量' %>
+              <%= f.select :quantity, (1..cart_item.item.stock).to_a, { selected: cart_item.quantity } %>
+                <%= f.submit '変更', class: 'btn btn-secondary btn-sm rounded-pill'%>
+            <% end %>  
+          </td>
+          <td style="width:25%" align="center">¥<%= cart_item.item.price %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row mb-5">
+    <div class="offset-sm-10 col-sm-2">
+      <%= link_to '削除', cart_item, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger btn-block rounded-pill' %>
+    </div>
+  </div>
+  <% total_price.push(cart_item.item.price * cart_item.quantity) %>
+  <% total_quantity.push(cart_item.quantity) %>
+  <% end %>
+  
+  <div class="row">
+    <div class="offset-sm-8 col-sm-2">
+      <strong>購入品数:<%= total_quantity.sum %>点</strong>
+    </div>
+    <div class="col-sm-2">
+     <strong>小計:¥<%= total_price.sum %></strong>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="offset-sm-9 col-sm-3">
+    <%= link_to '注文を確定', confirm_cart_items_path, class: 'btn btn-primary btn-lg rounded-pill', method: :patch %>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>カートに商品は入っていません</h1>
+    </div>
+  </div>
+<% end %>  
 
-<%= @cart_items %>
+<%= link_to '<< 商品一覧に戻る', root_path %>

@@ -34,7 +34,7 @@
   <% else %>
     <div class="row my-4">
       <div class="col-sm-4 offset-sm-8">
-        <%= form_with(model: current_user.cart_items.build, local:true) do |f| %>
+        <%= form_with(model: current_user.cart_items.build, local: true) do |f| %>
           <%= f.label :quantity, '数量' %>
           <%= f.select :quantity, (1..@item.stock).to_a %>
           <%= f.hidden_field :item_id, value: @item.id %>
