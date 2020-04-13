@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   def index
     search_word = params[:search]
     if search_word == nil
-      @items = Item.order(Arel.sql("RAND()")).all.page(params[:page])
+      @items = Item.all.page(params[:page])
     else
       @items = Item.where(['name LIKE ? or description LIKE ?', "%#{search_word}%", "%#{search_word}%"]).page(params[:page])
     end  
