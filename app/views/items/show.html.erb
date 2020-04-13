@@ -3,6 +3,8 @@
     <div class="card">
       <% if @item.image? %>
         <%= image_tag @item.image.url, class: 'card-img-top' %>
+      <% else %>
+        <%= image_tag '/assets/default.png', class: 'card-img-top' %>
       <% end %>
     
       <div class="card-body">
