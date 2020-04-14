@@ -34,8 +34,20 @@ class CartItemsController < ApplicationController
   end
   
   def confirm
-    if @cart_item = CartItem.where(user_id: current_user.id).where(ordered_flag: false)
-      @cart_item.update_all(ordered_flag: true)
+    puts 'ここを見ろ！'
+    if @cart_items = CartItem.where(user_id: current_user.id).where(ordered_flag: false)
+      p @cart_items
+      
+      @cart_items.each do |cart_item|
+        item = Item.find(cart_item.item_id)
+        puts 'ここを見ろ'
+        puts item.name
+        puts item.stock
+      #  item.stock = item.stock - cart_item.quantity
+      #  item.save
+        item.update(stock: item.stock.to_i - cart_item.quantity.to_i)
+      end
+      @cart_items.update_all(ordered_flag: true)
       flash[:success] = '注文を確定しました'
       redirect_to cart_items_url
     else
