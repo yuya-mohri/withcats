@@ -34,13 +34,11 @@ class CartItemsController < ApplicationController
   end
   
   def confirm
-    puts 'ここを見ろ！'
     if @cart_items = CartItem.where(user_id: current_user.id).where(ordered_flag: false)
       p @cart_items
       
       @cart_items.each do |cart_item|
         item = Item.find(cart_item.item_id)
-        puts 'ここを見ろ'
         puts item.name
         puts item.stock
       #  item.stock = item.stock - cart_item.quantity
