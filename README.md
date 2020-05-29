@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+猫専用グッズの簡易的な模擬ECサイトです。（決済機能は搭載していません）
 
-Things you may want to cover:
+動作用に下記2種のアカウントを用意しています。
 
-* Ruby version
+* 管理アカウント
 
-* System dependencies
+ログインメールアドレス: admin@email.com
 
-* Configuration
+パスワード: admin
 
-* Database creation
+新規商品の登録、商品情報の編集、既存商品の削除　を行うことができます。
 
-* Database initialization
+* 顧客アカウント
 
-* How to run the test suite
+ログインメールアドレス: customer@email.com
 
-* Services (job queues, cache servers, search engines, etc.)
+パスワード: customer
 
-* Deployment instructions
-
-* ...
+商品をカートに入れる、カート内情報の編集、ユーザ情報の編集　を行うことができます。
