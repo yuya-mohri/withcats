@@ -58,7 +58,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'kaminari'
 
-gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem 'carrierwave', '~> 1.3'
 gem 'cloudinary'
 
 group :production do
